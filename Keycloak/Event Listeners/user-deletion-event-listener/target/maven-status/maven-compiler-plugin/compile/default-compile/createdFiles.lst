@@ -1,0 +1,2 @@
+com\keycloak\course\listener\deletion\UserDeletionListenerProvider.class
+com\keycloak\course\listener\deletion\UserDeletionListenerProviderFactory.class

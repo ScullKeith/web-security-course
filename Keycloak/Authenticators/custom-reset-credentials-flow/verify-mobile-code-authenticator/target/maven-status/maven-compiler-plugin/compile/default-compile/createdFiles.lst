@@ -1,0 +1,3 @@
+com\keycloak\course\auth\mobile\VerifyMobileCodeAuthenticatorFactory.class
+com\keycloak\course\auth\mobile\VerifyMobileCodeAuthenticator.class
+com\keycloak\course\auth\mobile\MockSMSGateway.class

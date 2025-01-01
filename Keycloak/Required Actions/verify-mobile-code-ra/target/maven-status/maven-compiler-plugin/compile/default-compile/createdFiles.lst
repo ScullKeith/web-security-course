@@ -1,0 +1,4 @@
+com\keycloak\course\ra\mobile\VerifyMobileCodeRequiredActionFactory.class
+com\keycloak\course\ra\mobile\Idp.class
+com\keycloak\course\ra\mobile\MockSMSGateway.class
+com\keycloak\course\ra\mobile\VerifyMobileCodeRequiredAction.class

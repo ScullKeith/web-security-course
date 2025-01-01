@@ -1,0 +1,1 @@
+verifyCodeTitle=Confirm the code sent to {0}

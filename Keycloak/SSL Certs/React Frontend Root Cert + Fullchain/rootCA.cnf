@@ -1,0 +1,42 @@
+[ ca ]
+default_ca = CA_default
+
+[ CA_default ]
+# Removed directory paths since you are not using them
+# certs             = $dir/certs      # Where the issued certs are kept
+# crl_dir           = $dir/crl        # Where the issued CRLs are kept
+# new_certs_dir     = $dir/newcerts   # Default place for new certs
+# database          = $dir/index.txt   # Database index file
+# serial            = $dir/serial      # Serial number file
+# RANDFILE          = $dir/private/.rand # Random file
+default_md        = sha256           # Default message digest
+policy            = policy_any       # Policy for signing
+
+[ policy_any ]
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = supplied
+
+[ req ]
+default_bits        = 2048             # RSA key size
+distinguished_name  = req_distinguished_name
+x509_extensions     = v3_ca             # Use v3_ca for CA certificates
+prompt              = no
+
+[ req_distinguished_name ]
+C  = US
+ST = North Dakota
+L  = Moorhead
+O  = Root org
+OU = Root CA
+CN = Root CA
+emailAddress = rootca@example.com
+
+[ v3_ca ]
+basicConstraints = CA:true, pathlen:1
+keyUsage = critical, cRLSign, keyCertSign
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = issuer

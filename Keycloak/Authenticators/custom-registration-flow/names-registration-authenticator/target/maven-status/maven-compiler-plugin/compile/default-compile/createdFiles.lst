@@ -1,0 +1,2 @@
+com\keycloak\course\authenticator\names\NamesRegistrationAuthenticator.class
+com\keycloak\course\authenticator\names\NamesRegistrationAuthenticatorFactory.class

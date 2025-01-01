@@ -1,0 +1,2 @@
+com\keycloak\course\authenticator\persistence\UserPersistenceRegistrationAuthenticator.class
+com\keycloak\course\authenticator\persistence\UserPersistenceRegistrationAuthenticatorFactory.class

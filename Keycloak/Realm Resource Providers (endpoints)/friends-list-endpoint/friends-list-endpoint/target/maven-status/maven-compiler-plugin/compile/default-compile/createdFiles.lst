@@ -1,0 +1,4 @@
+com\keycloak\course\endpoint\friends\list\FriendsListQueryEndpointProvider$IdsRequest.class
+com\keycloak\course\endpoint\friends\list\FriendsListQueryEndpointProvider.class
+com\keycloak\course\endpoint\friends\list\FriendsListQueryEndpointProviderFactory.class
+com\keycloak\course\endpoint\friends\list\PublicUserDTO.class

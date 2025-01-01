@@ -1,0 +1,41 @@
+[ ca ]
+default_ca = CA_default
+
+[ CA_default ]
+default_md       = sha256
+policy           = policy_any
+
+[ policy_any ]
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = supplied
+
+[ req ]
+default_bits       = 2048
+prompt             = no
+default_md         = sha256
+distinguished_name = req_distinguished_name
+req_extensions     = v3_req
+
+[ req_distinguished_name ]
+C  = US
+ST = North Dakota
+L  = Moorhead
+O  = Root org
+OU = Intermediate CA
+CN = Intermediate CA
+emailAddress = intermediateaddress@gmail.com
+
+[ v3_req ]
+basicConstraints = CA:true, pathlen:0
+keyUsage = critical, cRLSign, keyCertSign
+subjectKeyIdentifier = hash
+
+[ v3_ca ]
+basicConstraints = CA:true, pathlen:0
+keyUsage = critical, cRLSign, keyCertSign
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = issuer
