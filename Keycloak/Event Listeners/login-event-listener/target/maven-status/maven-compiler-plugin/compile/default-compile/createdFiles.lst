@@ -1,0 +1,4 @@
+com\keycloak\course\listener\login\IdpEmailVerificationListenerProvider.class
+com\keycloak\course\listener\login\Idp.class
+com\keycloak\course\listener\login\IdpEmailVerificationListenerProviderFactory.class
+com\keycloak\course\listener\login\IdentityProviders.class

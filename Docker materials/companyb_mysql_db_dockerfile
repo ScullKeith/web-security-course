@@ -1,0 +1,3 @@
+FROM mysql:latest
+
+COPY ./auth_server_initialize_table.sql /docker-entrypoint-initdb.d

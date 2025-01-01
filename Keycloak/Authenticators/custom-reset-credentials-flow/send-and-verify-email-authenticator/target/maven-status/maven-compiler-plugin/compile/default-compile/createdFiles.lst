@@ -1,0 +1,2 @@
+com\keycloak\course\authenticator\verifyemail\SendAndVerifyEmailAuthenticator.class
+com\keycloak\course\authenticator\verifyemail\SendAndVerifyEmailAuthenticatorFactory.class

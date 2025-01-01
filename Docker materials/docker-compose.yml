@@ -1,0 +1,107 @@
+version: '3'
+services:
+  keycloak-server:
+    container_name: custom-keycloak-server
+    build: .
+    environment:
+      KC_CACHE: local
+      KEYCLOAK_ADMIN: admin77
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: mysql
+      KC_DB_URL: jdbc:mysql://keycloak_mysql_db:3306/keycloak_mysql_db_2
+      KC_DB_USERNAME: root
+      KC_DB_PASSWORD: password
+      KC_LOG_LEVEL: DEBUG 
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      PROXY_ADDRESS_FORWARDING: true
+      KEYCLOAK_FRONTEND_URL: https://localhost:8443
+      KC_HTTPS_KEY_STORE_FILE: /opt/keycloak/conf/truststores/keycloak_server.p12
+      KC_HTTPS_KEY_STORE_PASSWORD: password
+    expose:
+      - '8443'
+    ports:
+      - '8443:8443'
+    depends_on:
+      keycloak_mysql_db:
+        condition: "service_healthy"
+    networks:
+      - my-network
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://localhost:8080/health | grep 'UP'"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 50
+    #   start_period: 250s
+    
+  keycloak_mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: keycloak_mysql_db_2
+      MYSQL_USER: scullkeith 
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - my-network
+  friends_mysql_db: 
+    image: mysql:latest 
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: friends_db
+      MYSQL_USER: scullkeith 
+      MYSQL_PASSWORD: password
+    ports: 
+        - "3308:3306"
+    volumes: 
+        - ./friends_db_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - my-network    
+  companyb_mysql_db: 
+    build: 
+      context: ./
+      dockerfile: companyb_mysql_db_dockerfile
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: companyb_mysql_db
+      MYSQL_USER: scullkeith 
+      MYSQL_PASSWORD: password
+    ports: 
+        - "3307:3306"
+    # volumes: 
+    #     - ./companyb_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - my-network    
+  auth-server:
+    image: 284a96d89ef3
+    ports: 
+      - "8444:8444"
+    depends_on:
+      companyb_mysql_db:
+        condition: "service_healthy"
+    networks:
+      - my-network
+networks:
+  my-network:
+    driver: bridge
